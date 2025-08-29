@@ -13,5 +13,7 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts"
-  ]
+, ]
 }
+
+// "app/_layout.jsx", "app/index.jsx", "screens/StartGameScreen.jsx", "screens/GameScreen.jsx", "screens/GameOverScreen.jsx", "components/PrimaryBtn.jsx" 

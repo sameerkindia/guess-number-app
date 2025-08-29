@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "01-basic-native",
-    "slug": "01-basic-native",
+    "name": "01-guess-number",
+    "slug": "01-guess-number",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "01basicnative",
+    "scheme": "01guessnumber",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
