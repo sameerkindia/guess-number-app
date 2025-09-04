@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, View } from "react-native";
+import { Alert, FlatList, StyleSheet, Text, View } from "react-native";
 import NumberContainer from "../components/game/NumberContainer";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
@@ -23,12 +23,18 @@ let maxBoundry = 100;
 const GameScreen = ({ userNumber, onGameOver }) => {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
       onGameOver();
     }
   }, [currentGuess, userNumber, onGameOver]);
+
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundry = 100;
+  }, []);
 
   function nextGuessHandler(direction) {
     if (
@@ -53,6 +59,7 @@ const GameScreen = ({ userNumber, onGameOver }) => {
       currentGuess
     );
     setCurrentGuess(newRandomNumber);
+    setGuessRounds((arr) => [newRandomNumber, ...arr]);
   }
   // const
   return (
@@ -61,7 +68,9 @@ const GameScreen = ({ userNumber, onGameOver }) => {
       <NumberContainer>{currentGuess}</NumberContainer>
       {/* GUESS */}
       <Card>
-        <InstructionText style={styles.instText}>Higher or lower</InstructionText>
+        <InstructionText style={styles.instText}>
+          Higher or lower
+        </InstructionText>
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryBtn onPress={nextGuessHandler.bind(this, "lower")}>
@@ -76,7 +85,14 @@ const GameScreen = ({ userNumber, onGameOver }) => {
         </View>
         {/* + - */}
       </Card>
-      <View>{/* Log rounds */}</View>
+      <View>
+        {/* {guessRounds.map(guessRound => <Text key={guessRound}>{guessRound}</Text>)} */}
+        <FlatList
+          data={guessRounds}
+          renderItem={(guessRound) => <Text>{guessRound.item}</Text>}
+          keyExtractor={(item) => item}
+        />
+      </View>
     </View>
   );
 };
@@ -88,8 +104,8 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 24,
   },
-  instText:{
-    marginBottom: 12
+  instText: {
+    marginBottom: 12,
   },
   buttonsContainer: {
     flexDirection: "row",
