@@ -15,8 +15,9 @@ const index = () => {
     setUserNumber(pickedNum);
   }
 
-  function gameOverHandler() {
+  function gameOverHandler(numberOfRounds) {
     setIsGameOver(true);
+    setGuessRounds(numberOfRounds)
   }
 
   function startNewGameHandler() {
